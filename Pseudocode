@@ -1,0 +1,57 @@
+Pseudocode for Two-Player Tic Tac Toe Game**
+
+1. Initialize Variables and Elements**
+- Variables:
+  - `currentPlayer`: Set to 'X'
+  - `gameActive`: Set to `true`
+  - `board`: Array of 9 empty strings
+
+- HTML Elements:
+  - `cells`: Select all elements with class `cell`
+  - `playerDisplay`: Select the element with class `player`
+  - `resetButton`: Select the element with id `reset`
+
+2. Define Winning Conditions
+- **winningConditions**: Array of arrays representing winning index combinations
+
+3. Handle Cell Click Event
+- Function `handleCellClick(event)`:
+  - Get the clicked cell
+  - Get the `data-index` attribute of the cell
+  - If `board[cellIndex]` is not empty or `gameActive` is `false`, return
+  - Set `board[cellIndex]` to `currentPlayer`
+  - Set `cell.textContent` to `currentPlayer`
+  - Call `checkResult()`
+  - Call `switchPlayer()`
+
+4. Switch Player
+- Function `switchPlayer()`:
+  - If `currentPlayer` is 'X', set to 'O', else set to 'X'
+  - Update `playerDisplay.textContent` to show current player's turn
+
+5. Check Game Result
+- Function `checkResult()`:
+  - Set `roundWon` to `false`
+  - Loop through each `winningCondition`:
+    - Destructure `winningCondition` into `a`, `b`, `c`
+    - If `board[a]` is non-empty and `board[a]` equals `board[b]` and `board[a]` equals `board[c]`, set `roundWon` to `true` and break loop
+  - If `roundWon` is `true`:
+    - Update `playerDisplay.textContent` to show winning message
+    - Set `gameActive` to `false`
+    - Return
+  - If `board` does not contain any empty strings:
+    - Update `playerDisplay.textContent` to show draw message
+    - Set `gameActive` to `false`
+    - Return
+
+6. Reset Game
+- Function `resetGame()`:
+  - Reset `board` to array of 9 empty strings
+  - Set `gameActive` to `true`
+  - Set `currentPlayer` to 'X'
+  - Update `playerDisplay.textContent` to show current player's turn
+  - Clear `textContent` of all cells
+
+7. Add Event Listeners
+- Add click event listener to each cell - to call `handleCellClick`
+- Add click event listener to reset button - to call `resetGame`
